@@ -1,42 +1,43 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class OOPSBanner {
 
-    // UC7: Static Inner Class for Character Pattern Management
-    static class CharacterPatternMap {
-        private char character;
-        private String[] patterns;
+    // Centralized Pattern Management using Map
+    private static final Map<Character, String[]> patternMap = new HashMap<>();
 
-        public CharacterPatternMap(char character, String[] patterns) {
-            this.character = character;
-            this.patterns = patterns;
-        }
-
-        public String getRow(int row) {
-            return (row >= 0 && row < patterns.length) ? patterns[row] : "";
-        }
+    static {
+        patternMap.put('O', new String[]{" **** ", "* *", "* *", "* *", " **** "});
+        patternMap.put('P', new String[]{"***** ", "* *", "***** ", "* ", "* "});
+        patternMap.put('S', new String[]{" **** ", "* ", " **** ", "     *", " **** "});
     }
 
     public static void main(String[] args) {
+        renderBanner("OOPS");
+    }
+
+    /**
+     * UC8: Final Rendering Function
+     * Uses patternMap for O(1) retrieval and nested loops for assembly.
+     */
+    public static void renderBanner(String word) {
         String gap = "   ";
+        int bannerHeight = 5;
 
-        // Creating instances for O, P, and S
-        CharacterPatternMap charO = new CharacterPatternMap('O', new String[]{
-            " **** ", "* *", "* *", "* *", " **** "
-        });
-        CharacterPatternMap charP = new CharacterPatternMap('P', new String[]{
-            "***** ", "* *", "***** ", "* ", "* "
-        });
-        CharacterPatternMap charS = new CharacterPatternMap('S', new String[]{
-            " **** ", "* ", " **** ", "     *", " **** "
-        });
-
-        // Building the banner using the objects
-        for (int i = 0; i < 5; i++) {
-            System.out.println(String.join(gap, 
-                charO.getRow(i), 
-                charO.getRow(i), 
-                charP.getRow(i), 
-                charS.getRow(i)
-            ));
+        for (int row = 0; row < bannerHeight; row++) {
+            StringBuilder lineBuilder = new StringBuilder();
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                String[] pattern = patternMap.get(c);
+                
+                if (pattern != null) {
+                    lineBuilder.append(pattern[row]);
+                    if (i < word.length() - 1) {
+                        lineBuilder.append(gap);
+                    }
+                }
+            }
+            System.out.println(lineBuilder.toString());
         }
     }
 }
