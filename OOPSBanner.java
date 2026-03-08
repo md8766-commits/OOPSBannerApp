@@ -1,9 +1,8 @@
 public class OOPSBanner {
     public static void main(String[] args) {
-        // UC4: Using an array and loop for modularity
+        // UC5: Inline Array Initialization with String.join() for conciseness
         String gap = "   ";
-        
-        // Array population using String.join()
+
         String[] bannerLines = {
             String.join(gap, " **** ", " **** ", " *****", "  ****"),
             String.join(gap, "* *", "* *", "* *", " * "),
@@ -12,7 +11,7 @@ public class OOPSBanner {
             String.join(gap, " **** ", " **** ", "* ", " **** ")
         };
 
-        // Enhanced for-loop for cleaner output traversal
+        // Render using the enhanced for-loop
         for (String line : bannerLines) {
             System.out.println(line);
         }
