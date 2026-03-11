@@ -3,7 +3,6 @@ import java.util.Map;
 
 public class OOPSBanner {
 
-    // Centralized Pattern Management using Map
     private static final Map<Character, String[]> patternMap = new HashMap<>();
 
     static {
@@ -16,10 +15,6 @@ public class OOPSBanner {
         renderBanner("OOPS");
     }
 
-    /**
-     * UC8: Final Rendering Function
-     * Uses patternMap for O(1) retrieval and nested loops for assembly.
-     */
     public static void renderBanner(String word) {
         String gap = "   ";
         int bannerHeight = 5;
